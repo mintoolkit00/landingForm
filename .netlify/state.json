@@ -1,0 +1,20 @@
+{
+	"geolocation": {
+		"data": {
+			"city": "Pozuelo de Alarcón",
+			"country": {
+				"code": "ES",
+				"name": "Spain"
+			},
+			"subdivision": {
+				"code": "MD",
+				"name": "Madrid"
+			},
+			"timezone": "Europe/Madrid",
+			"latitude": 40.4441,
+			"longitude": -3.8137,
+			"postalCode": "28224"
+		},
+		"timestamp": 1748505049460
+	}
+}
