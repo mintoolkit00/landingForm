@@ -23,4 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
+.env
+
 ./credentials/landingform-461311-c79ef41f55b1.json
