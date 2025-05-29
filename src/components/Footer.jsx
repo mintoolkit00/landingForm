@@ -6,10 +6,18 @@ const Footer = () => {
       <div className={styles.container}>
         <p>
           &copy; {new Date().getFullYear()} LandingForm. Built with ❤️ for
-          makers.
+          makers.{" "}
+          <a
+            href="https://x.com/mintoolkit00"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.link}
+          >
+            Mintoolkit
+          </a>
         </p>
         <a
-          href="https://github.com/tuusuario/landing-form"
+          href="https://github.com/mintoolkit00/landingForm"
           target="_blank"
           rel="noopener noreferrer"
           className={styles.link}
