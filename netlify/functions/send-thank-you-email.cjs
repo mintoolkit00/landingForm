@@ -1,5 +1,5 @@
-const { sendEmail } = require('../../utils/sendEmail.js')
-const { thankYouTemplate } = require('../../utils/templates.js')
+const { sendEmail } = require('../../src/email/sendEmail.js')
+const { thankYouTemplate } = require('../../src/email/templates.js')
 
 exports.handler = async function (event) {
     if (event.httpMethod !== 'POST') {
