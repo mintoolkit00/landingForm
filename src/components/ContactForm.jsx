@@ -3,28 +3,31 @@ import styles from "./ContactForm.module.css";
 
 const ContactForm = ({ target = "notion" }) => {
   const [status, setStatus] = useState("idle");
+  //Fields included in the form
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
-
+  //Generic function to handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  //Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
 
+    // URL for the function based on the target
     const functionPath = {
       notion: "/.netlify/functions/send-feedback",
       sheet: "/.netlify/functions/send-feedback-google-sheet",
     }[target];
 
     try {
-      // 1.  feedback
+      // 1.  feedback call
       const feedbackResponse = await fetch(functionPath, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -33,7 +36,7 @@ const ContactForm = ({ target = "notion" }) => {
 
       if (!feedbackResponse.ok) throw new Error("Feedback failed");
 
-      // 2. Send thank you email
+      // 2. Send thank you email answer
       const emailResponse = await fetch(
         "/.netlify/functions/send-thank-you-email",
         {

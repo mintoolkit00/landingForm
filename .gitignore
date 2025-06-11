@@ -26,3 +26,6 @@ dist-ssr
 .env
 
 ./credentials/landingform-461311-c79ef41f55b1.json
+
+# Local Netlify folder
+.netlify

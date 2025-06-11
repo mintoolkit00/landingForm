@@ -8,6 +8,7 @@ const Header = () => {
         <nav className={styles.nav}>
           <a href="#features">Features</a>
           <a href="#contact">Contact</a>
+          <a href="#booking">Booking</a>
         </nav>
       </div>
     </header>
