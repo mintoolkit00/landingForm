@@ -18,27 +18,37 @@ const ContactForm = ({ target = "notion" }) => {
     e.preventDefault();
     setStatus("loading");
 
-    // Define the correct endpoint based on the target
     const functionPath = {
       notion: "/.netlify/functions/send-feedback",
       sheet: "/.netlify/functions/send-feedback-google-sheet",
     }[target];
 
     try {
-      const response = await fetch(functionPath, {
+      // 1.  feedback
+      const feedbackResponse = await fetch(functionPath, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        setStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        throw new Error("Network response was not ok.");
-      }
+      if (!feedbackResponse.ok) throw new Error("Feedback failed");
+
+      // 2. Send thank you email
+      const emailResponse = await fetch(
+        "/.netlify/functions/send-thank-you-email",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: formData.name, email: formData.email }),
+        }
+      );
+
+      if (!emailResponse.ok) throw new Error("Email failed");
+
+      setStatus("success");
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error(error);
+      console.error("❌ Submission error:", error);
       setStatus("error");
     }
   };
